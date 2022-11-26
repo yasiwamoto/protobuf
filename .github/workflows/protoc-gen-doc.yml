@@ -1,0 +1,31 @@
+on: push
+jobs:
+  proto_doc:
+    runs-on: ubuntu-latest
+    steps:
+      # Protocol Buffers Install
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+      # Protoc-gen-doc Install
+      - name: Install Protoc-gen-doc
+        run: |
+          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+      # Make for Document Dir
+      - name: Make Doc-directory
+        run: mkdir -p docs
+      # Target Checkout
+      - name: Target Checkout
+        uses: actions/checkout@v2
+      # Generate Doc 
+      - name: Generate Doc
+        run: |
+          find . -type f -name *.proto | while read PROTO; do
+            echo ${PROTO}
+            protoc --doc_out=./docs --doc_opt=html,${PROTO##*/}.html ${PROTO}
+          done
+          git config user.name github-actions
+          git config user.email yas.biz.iwamoto@gmail.com
+          git add .
+          git commit -m "generated"
+          git push
+          git pull origin main
