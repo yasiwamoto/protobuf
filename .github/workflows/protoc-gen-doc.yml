@@ -21,7 +21,7 @@ jobs:
         run: |
           find . -type f -name "*.proto" | while read PROTO; do
             echo ${PROTO}
-            if [ ${PROTO##*.} == "proto" ]
+            if [ ${PROTO##*.} == "proto" ]; then
               protoc --doc_out=./docs --doc_opt=html,${PROTO%.*}.html ${PROTO}
             fi
           done
