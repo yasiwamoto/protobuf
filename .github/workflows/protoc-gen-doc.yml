@@ -29,6 +29,6 @@ jobs:
           git config user.name github-actions
           git config user.email yas.biz.iwamoto@gmail.com
           git add .
-          git commit -m "generated"
+          git commit -m "proto doc generated"
           git push
           git pull origin main
