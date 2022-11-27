@@ -26,10 +26,12 @@ jobs:
               protoc --doc_out=./docs --doc_opt=markdown,${PROTO%.*}.md ${PROTO}
             fi
           done
-          
+      # Document Commit 
+      - name: Document commit
+        run: |
           git config user.name github-actions
           git config user.email action@github.com
           git add .
-          git commit -m "proto doc generated"
+          git commit -m "proto doc generated" || echo "No changes to commit"
           git push
           git pull origin main
