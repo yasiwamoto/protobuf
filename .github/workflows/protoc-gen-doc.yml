@@ -21,7 +21,9 @@ jobs:
         run: |
           find . -type f -name "*.proto" | while read PROTO; do
             echo ${PROTO}
-            protoc --doc_out=./docs --doc_opt=html,${PROTO##*/}.html ${PROTO}
+            if [ ${PROTO##*.} == "proto" ]
+              protoc --doc_out=./docs --doc_opt=html,${PROTO%.*}.html ${PROTO}
+            fi
           done
           git config user.name github-actions
           git config user.email yas.biz.iwamoto@gmail.com
