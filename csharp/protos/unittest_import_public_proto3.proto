@@ -37,5 +37,5 @@ package protobuf_unittest_import;
 option csharp_namespace = "Google.Protobuf.TestProtos";
 
 message PublicImportMessage {
- int32 e = 1;
+ int32 e = 2;
 }
