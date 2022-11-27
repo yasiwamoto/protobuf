@@ -40,7 +40,7 @@ message TestAny {
   optional google.protobuf.Any value = 1;
   optional int32 int_value = 2;
   map<string, int32> map_value = 3;
-  extensions 10 to max;
+  extensions 20 to max;
 }
 
 message TestAnyExtension1 {
