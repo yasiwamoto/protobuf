@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#php%2ftests%2fproto%2ftest_reserved_message_lower.proto">php/tests/proto/test_reserved_message_lower.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#lower.abstract"><span class="badge">M</span>abstract</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.and"><span class="badge">M</span>and</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.array"><span class="badge">M</span>array</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.as"><span class="badge">M</span>as</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.bool"><span class="badge">M</span>bool</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.break"><span class="badge">M</span>break</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.callable"><span class="badge">M</span>callable</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.case"><span class="badge">M</span>case</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.catch"><span class="badge">M</span>catch</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.class"><span class="badge">M</span>class</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.clone"><span class="badge">M</span>clone</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.const"><span class="badge">M</span>const</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.continue"><span class="badge">M</span>continue</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.declare"><span class="badge">M</span>declare</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.default"><span class="badge">M</span>default</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.die"><span class="badge">M</span>die</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.do"><span class="badge">M</span>do</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.echo"><span class="badge">M</span>echo</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.else"><span class="badge">M</span>else</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.elseif"><span class="badge">M</span>elseif</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.empty"><span class="badge">M</span>empty</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.enddeclare"><span class="badge">M</span>enddeclare</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.endfor"><span class="badge">M</span>endfor</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.endforeach"><span class="badge">M</span>endforeach</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.endif"><span class="badge">M</span>endif</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.endswitch"><span class="badge">M</span>endswitch</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.endwhile"><span class="badge">M</span>endwhile</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.eval"><span class="badge">M</span>eval</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.exit"><span class="badge">M</span>exit</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.extends"><span class="badge">M</span>extends</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.false"><span class="badge">M</span>false</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.final"><span class="badge">M</span>final</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.finally"><span class="badge">M</span>finally</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.float"><span class="badge">M</span>float</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.fn"><span class="badge">M</span>fn</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.for"><span class="badge">M</span>for</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.foreach"><span class="badge">M</span>foreach</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.function"><span class="badge">M</span>function</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.global"><span class="badge">M</span>global</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.goto"><span class="badge">M</span>goto</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.if"><span class="badge">M</span>if</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.implements"><span class="badge">M</span>implements</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.include"><span class="badge">M</span>include</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.include_once"><span class="badge">M</span>include_once</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.instanceof"><span class="badge">M</span>instanceof</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.insteadof"><span class="badge">M</span>insteadof</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.int"><span class="badge">M</span>int</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.interface"><span class="badge">M</span>interface</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.isset"><span class="badge">M</span>isset</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.iterable"><span class="badge">M</span>iterable</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.list"><span class="badge">M</span>list</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.match"><span class="badge">M</span>match</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.namespace"><span class="badge">M</span>namespace</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.new"><span class="badge">M</span>new</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.null"><span class="badge">M</span>null</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.or"><span class="badge">M</span>or</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.parent"><span class="badge">M</span>parent</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.print"><span class="badge">M</span>print</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.private"><span class="badge">M</span>private</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.protected"><span class="badge">M</span>protected</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.public"><span class="badge">M</span>public</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.readonly"><span class="badge">M</span>readonly</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.require"><span class="badge">M</span>require</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.require_once"><span class="badge">M</span>require_once</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.return"><span class="badge">M</span>return</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.self"><span class="badge">M</span>self</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.static"><span class="badge">M</span>static</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.string"><span class="badge">M</span>string</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.switch"><span class="badge">M</span>switch</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.throw"><span class="badge">M</span>throw</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.trait"><span class="badge">M</span>trait</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.true"><span class="badge">M</span>true</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.try"><span class="badge">M</span>try</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.unset"><span class="badge">M</span>unset</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.use"><span class="badge">M</span>use</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.var"><span class="badge">M</span>var</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.void"><span class="badge">M</span>void</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.while"><span class="badge">M</span>while</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.xor"><span class="badge">M</span>xor</a>
+                </li>
+              
+                <li>
+                  <a href="#lower.yield"><span class="badge">M</span>yield</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="php/tests/proto/test_reserved_message_lower.proto">php/tests/proto/test_reserved_message_lower.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="lower.abstract">abstract</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.and">and</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.array">array</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.as">as</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.bool">bool</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.break">break</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.callable">callable</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.case">case</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.catch">catch</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.class">class</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.clone">clone</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.const">const</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.continue">continue</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.declare">declare</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.default">default</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.die">die</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.do">do</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.echo">echo</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.else">else</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.elseif">elseif</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.empty">empty</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.enddeclare">enddeclare</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.endfor">endfor</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.endforeach">endforeach</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.endif">endif</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.endswitch">endswitch</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.endwhile">endwhile</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.eval">eval</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.exit">exit</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.extends">extends</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.false">false</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.final">final</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.finally">finally</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.float">float</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.fn">fn</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.for">for</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.foreach">foreach</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.function">function</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.global">global</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.goto">goto</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.if">if</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.implements">implements</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.include">include</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.include_once">include_once</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.instanceof">instanceof</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.insteadof">insteadof</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.int">int</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.interface">interface</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.isset">isset</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.iterable">iterable</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.list">list</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.match">match</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.namespace">namespace</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.new">new</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.null">null</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.or">or</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.parent">parent</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.print">print</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.private">private</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.protected">protected</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.public">public</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.readonly">readonly</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.require">require</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.require_once">require_once</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.return">return</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.self">self</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.static">static</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.string">string</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.switch">switch</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.throw">throw</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.trait">trait</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.true">true</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.try">try</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.unset">unset</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.use">use</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.var">var</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.void">void</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.while">while</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.xor">xor</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="lower.yield">yield</h3>
+        <p></p>
+
+        
+
+        
+      
+
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+

@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#ruby%2ftests%2fbasic_test.proto">ruby/tests/basic_test.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#basic_test.Bar"><span class="badge">M</span>Bar</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Baz"><span class="badge">M</span>Baz</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Enumer"><span class="badge">M</span>Enumer</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Foo"><span class="badge">M</span>Foo</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.HelloRequest"><span class="badge">M</span>HelloRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Inner"><span class="badge">M</span>Inner</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessage"><span class="badge">M</span>MapMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessage.MapStringEnumEntry"><span class="badge">M</span>MapMessage.MapStringEnumEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessage.MapStringInt32Entry"><span class="badge">M</span>MapMessage.MapStringInt32Entry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessage.MapStringMsgEntry"><span class="badge">M</span>MapMessage.MapStringMsgEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessageWireEquiv"><span class="badge">M</span>MapMessageWireEquiv</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessageWireEquiv_entry1"><span class="badge">M</span>MapMessageWireEquiv_entry1</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MapMessageWireEquiv_entry2"><span class="badge">M</span>MapMessageWireEquiv_entry2</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MyRepeatedStruct"><span class="badge">M</span>MyRepeatedStruct</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.MyStruct"><span class="badge">M</span>MyStruct</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.OneofMessage"><span class="badge">M</span>OneofMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Outer"><span class="badge">M</span>Outer</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Outer.ItemsEntry"><span class="badge">M</span>Outer.ItemsEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Recursive1"><span class="badge">M</span>Recursive1</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Recursive2"><span class="badge">M</span>Recursive2</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.TestEmbeddedMessageChild"><span class="badge">M</span>TestEmbeddedMessageChild</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.TestEmbeddedMessageParent"><span class="badge">M</span>TestEmbeddedMessageParent</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.TestMessage"><span class="badge">M</span>TestMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.TestMessage2"><span class="badge">M</span>TestMessage2</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.TestSingularFields"><span class="badge">M</span>TestSingularFields</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.TimeMessage"><span class="badge">M</span>TimeMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.WithJsonName"><span class="badge">M</span>WithJsonName</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper"><span class="badge">M</span>Wrapper</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapBoolEntry"><span class="badge">M</span>Wrapper.MapBoolEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapBytesEntry"><span class="badge">M</span>Wrapper.MapBytesEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapDoubleEntry"><span class="badge">M</span>Wrapper.MapDoubleEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapFloatEntry"><span class="badge">M</span>Wrapper.MapFloatEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapInt32Entry"><span class="badge">M</span>Wrapper.MapInt32Entry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapInt64Entry"><span class="badge">M</span>Wrapper.MapInt64Entry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapStringEntry"><span class="badge">M</span>Wrapper.MapStringEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapUint32Entry"><span class="badge">M</span>Wrapper.MapUint32Entry</a>
+                </li>
+              
+                <li>
+                  <a href="#basic_test.Wrapper.MapUint64Entry"><span class="badge">M</span>Wrapper.MapUint64Entry</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#basic_test.TestEnum"><span class="badge">E</span>TestEnum</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="ruby/tests/basic_test.proto">ruby/tests/basic_test.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="basic_test.Bar">Bar</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msg</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Baz">Baz</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msg</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Enumer">Enumer</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>optional_enum</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_enum</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>a_const</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>str</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>const</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Foo">Foo</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>bar</td>
+                  <td><a href="#basic_test.Bar">Bar</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>baz</td>
+                  <td><a href="#basic_test.Baz">Baz</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.HelloRequest">HelloRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a0</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a1</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a2</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a3</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a4</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a5</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a6</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a7</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a8</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_a9</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b0</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b1</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b2</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b3</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b4</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b5</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b6</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b7</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b8</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_b9</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c0</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c1</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c2</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c3</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c4</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c5</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c6</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c7</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c8</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_name_c9</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>version</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Inner">Inner</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="basic_test.MapMessage">MapMessage</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>map_string_int32</td>
+                  <td><a href="#basic_test.MapMessage.MapStringInt32Entry">MapMessage.MapStringInt32Entry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_string_msg</td>
+                  <td><a href="#basic_test.MapMessage.MapStringMsgEntry">MapMessage.MapStringMsgEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_string_enum</td>
+                  <td><a href="#basic_test.MapMessage.MapStringEnumEntry">MapMessage.MapStringEnumEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MapMessage.MapStringEnumEntry">MapMessage.MapStringEnumEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MapMessage.MapStringInt32Entry">MapMessage.MapStringInt32Entry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MapMessage.MapStringMsgEntry">MapMessage.MapStringMsgEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#basic_test.TestMessage2">TestMessage2</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MapMessageWireEquiv">MapMessageWireEquiv</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>map_string_int32</td>
+                  <td><a href="#basic_test.MapMessageWireEquiv_entry1">MapMessageWireEquiv_entry1</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_string_msg</td>
+                  <td><a href="#basic_test.MapMessageWireEquiv_entry2">MapMessageWireEquiv_entry2</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MapMessageWireEquiv_entry1">MapMessageWireEquiv_entry1</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MapMessageWireEquiv_entry2">MapMessageWireEquiv_entry2</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#basic_test.TestMessage2">TestMessage2</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MyRepeatedStruct">MyRepeatedStruct</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>structs</td>
+                  <td><a href="#basic_test.MyStruct">MyStruct</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.MyStruct">MyStruct</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>string</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>struct</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.OneofMessage">OneofMessage</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>a</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>b</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>c</td>
+                  <td><a href="#basic_test.TestMessage2">TestMessage2</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>d</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Outer">Outer</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>items</td>
+                  <td><a href="#basic_test.Outer.ItemsEntry">Outer.ItemsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Outer.ItemsEntry">Outer.ItemsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#basic_test.Inner">Inner</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Recursive1">Recursive1</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>foo</td>
+                  <td><a href="#basic_test.Recursive2">Recursive2</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Recursive2">Recursive2</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>foo</td>
+                  <td><a href="#basic_test.Recursive1">Recursive1</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.TestEmbeddedMessageChild">TestEmbeddedMessageChild</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sub_child</td>
+                  <td><a href="#basic_test.TestMessage">TestMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.TestEmbeddedMessageParent">TestEmbeddedMessageParent</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>child_msg</td>
+                  <td><a href="#basic_test.TestEmbeddedMessageChild">TestEmbeddedMessageChild</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>number</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_msg</td>
+                  <td><a href="#basic_test.TestEmbeddedMessageChild">TestEmbeddedMessageChild</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_number</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.TestMessage">TestMessage</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>optional_int32</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_int64</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_uint32</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_uint64</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_bool</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_float</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_double</td>
+                  <td><a href="#double">double</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_string</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_msg</td>
+                  <td><a href="#basic_test.TestMessage2">TestMessage2</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_enum</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_int32</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_int64</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_uint32</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_uint64</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_bool</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_float</td>
+                  <td><a href="#float">float</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_double</td>
+                  <td><a href="#double">double</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_string</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_msg</td>
+                  <td><a href="#basic_test.TestMessage2">TestMessage2</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_enum</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optional_msg2</td>
+                  <td><a href="#basic_test.TestSingularFields">TestSingularFields</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.TestMessage2">TestMessage2</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>foo</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.TestSingularFields">TestSingularFields</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>singular_int32</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_int64</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_uint32</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_uint64</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_bool</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_float</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_double</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_string</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_msg</td>
+                  <td><a href="#basic_test.TestMessage2">TestMessage2</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singular_enum</td>
+                  <td><a href="#basic_test.TestEnum">TestEnum</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.TimeMessage">TimeMessage</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration</td>
+                  <td><a href="#google.protobuf.Duration">google.protobuf.Duration</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.WithJsonName">WithJsonName</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>foo_bar</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>baz</td>
+                  <td><a href="#basic_test.WithJsonName">WithJsonName</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper">Wrapper</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>double</td>
+                  <td><a href="#google.protobuf.DoubleValue">google.protobuf.DoubleValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>float</td>
+                  <td><a href="#google.protobuf.FloatValue">google.protobuf.FloatValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>int32</td>
+                  <td><a href="#google.protobuf.Int32Value">google.protobuf.Int32Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>int64</td>
+                  <td><a href="#google.protobuf.Int64Value">google.protobuf.Int64Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uint32</td>
+                  <td><a href="#google.protobuf.UInt32Value">google.protobuf.UInt32Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uint64</td>
+                  <td><a href="#google.protobuf.UInt64Value">google.protobuf.UInt64Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bool</td>
+                  <td><a href="#google.protobuf.BoolValue">google.protobuf.BoolValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>string</td>
+                  <td><a href="#google.protobuf.StringValue">google.protobuf.StringValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bytes</td>
+                  <td><a href="#google.protobuf.BytesValue">google.protobuf.BytesValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>real_string</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>string_in_oneof</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_double</td>
+                  <td><a href="#google.protobuf.DoubleValue">google.protobuf.DoubleValue</a></td>
+                  <td>repeated</td>
+                  <td><p>Repeated wrappers don&#39;t make sense, but we still need to make sure they
+work and don&#39;t crash. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_float</td>
+                  <td><a href="#google.protobuf.FloatValue">google.protobuf.FloatValue</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_int32</td>
+                  <td><a href="#google.protobuf.Int32Value">google.protobuf.Int32Value</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_int64</td>
+                  <td><a href="#google.protobuf.Int64Value">google.protobuf.Int64Value</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_uint32</td>
+                  <td><a href="#google.protobuf.UInt32Value">google.protobuf.UInt32Value</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_uint64</td>
+                  <td><a href="#google.protobuf.UInt64Value">google.protobuf.UInt64Value</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_bool</td>
+                  <td><a href="#google.protobuf.BoolValue">google.protobuf.BoolValue</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_string</td>
+                  <td><a href="#google.protobuf.StringValue">google.protobuf.StringValue</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repeated_bytes</td>
+                  <td><a href="#google.protobuf.BytesValue">google.protobuf.BytesValue</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_double</td>
+                  <td><a href="#basic_test.Wrapper.MapDoubleEntry">Wrapper.MapDoubleEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Wrappers as map keys don&#39;t make sense, but we still need to make sure they
+work and don&#39;t crash. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_float</td>
+                  <td><a href="#basic_test.Wrapper.MapFloatEntry">Wrapper.MapFloatEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_int32</td>
+                  <td><a href="#basic_test.Wrapper.MapInt32Entry">Wrapper.MapInt32Entry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_int64</td>
+                  <td><a href="#basic_test.Wrapper.MapInt64Entry">Wrapper.MapInt64Entry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_uint32</td>
+                  <td><a href="#basic_test.Wrapper.MapUint32Entry">Wrapper.MapUint32Entry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_uint64</td>
+                  <td><a href="#basic_test.Wrapper.MapUint64Entry">Wrapper.MapUint64Entry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_bool</td>
+                  <td><a href="#basic_test.Wrapper.MapBoolEntry">Wrapper.MapBoolEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_string</td>
+                  <td><a href="#basic_test.Wrapper.MapStringEntry">Wrapper.MapStringEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>map_bytes</td>
+                  <td><a href="#basic_test.Wrapper.MapBytesEntry">Wrapper.MapBytesEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_double</td>
+                  <td><a href="#google.protobuf.DoubleValue">google.protobuf.DoubleValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_float</td>
+                  <td><a href="#google.protobuf.FloatValue">google.protobuf.FloatValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_int32</td>
+                  <td><a href="#google.protobuf.Int32Value">google.protobuf.Int32Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_int64</td>
+                  <td><a href="#google.protobuf.Int64Value">google.protobuf.Int64Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_uint32</td>
+                  <td><a href="#google.protobuf.UInt32Value">google.protobuf.UInt32Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_uint64</td>
+                  <td><a href="#google.protobuf.UInt64Value">google.protobuf.UInt64Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_bool</td>
+                  <td><a href="#google.protobuf.BoolValue">google.protobuf.BoolValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_string</td>
+                  <td><a href="#google.protobuf.StringValue">google.protobuf.StringValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_bytes</td>
+                  <td><a href="#google.protobuf.BytesValue">google.protobuf.BytesValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oneof_plain_string</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapBoolEntry">Wrapper.MapBoolEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.BoolValue">google.protobuf.BoolValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapBytesEntry">Wrapper.MapBytesEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.BytesValue">google.protobuf.BytesValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapDoubleEntry">Wrapper.MapDoubleEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.DoubleValue">google.protobuf.DoubleValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapFloatEntry">Wrapper.MapFloatEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.FloatValue">google.protobuf.FloatValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapInt32Entry">Wrapper.MapInt32Entry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.Int32Value">google.protobuf.Int32Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapInt64Entry">Wrapper.MapInt64Entry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.Int64Value">google.protobuf.Int64Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapStringEntry">Wrapper.MapStringEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.StringValue">google.protobuf.StringValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapUint32Entry">Wrapper.MapUint32Entry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.UInt32Value">google.protobuf.UInt32Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="basic_test.Wrapper.MapUint64Entry">Wrapper.MapUint64Entry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.UInt64Value">google.protobuf.UInt64Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="basic_test.TestEnum">TestEnum</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Default</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>A</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>B</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>C</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>v0</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+

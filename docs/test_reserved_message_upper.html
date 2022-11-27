@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#php%2ftests%2fproto%2ftest_reserved_message_upper.proto">php/tests/proto/test_reserved_message_upper.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#upper.ABSTRACT"><span class="badge">M</span>ABSTRACT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.AND"><span class="badge">M</span>AND</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ARRAY"><span class="badge">M</span>ARRAY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.AS"><span class="badge">M</span>AS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.BOOL"><span class="badge">M</span>BOOL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.BREAK"><span class="badge">M</span>BREAK</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CALLABLE"><span class="badge">M</span>CALLABLE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CASE"><span class="badge">M</span>CASE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CATCH"><span class="badge">M</span>CATCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CLASS"><span class="badge">M</span>CLASS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CLONE"><span class="badge">M</span>CLONE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CONST"><span class="badge">M</span>CONST</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.CONTINUE"><span class="badge">M</span>CONTINUE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.DECLARE"><span class="badge">M</span>DECLARE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.DEFAULT"><span class="badge">M</span>DEFAULT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.DIE"><span class="badge">M</span>DIE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.DO"><span class="badge">M</span>DO</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ECHO"><span class="badge">M</span>ECHO</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ELSE"><span class="badge">M</span>ELSE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ELSEIF"><span class="badge">M</span>ELSEIF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.EMPTY"><span class="badge">M</span>EMPTY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ENDDECLARE"><span class="badge">M</span>ENDDECLARE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ENDFOR"><span class="badge">M</span>ENDFOR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ENDFOREACH"><span class="badge">M</span>ENDFOREACH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ENDIF"><span class="badge">M</span>ENDIF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ENDSWITCH"><span class="badge">M</span>ENDSWITCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ENDWHILE"><span class="badge">M</span>ENDWHILE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.EVAL"><span class="badge">M</span>EVAL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.EXIT"><span class="badge">M</span>EXIT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.EXTENDS"><span class="badge">M</span>EXTENDS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FALSE"><span class="badge">M</span>FALSE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FINAL"><span class="badge">M</span>FINAL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FINALLY"><span class="badge">M</span>FINALLY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FLOAT"><span class="badge">M</span>FLOAT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FN"><span class="badge">M</span>FN</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FOR"><span class="badge">M</span>FOR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FOREACH"><span class="badge">M</span>FOREACH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.FUNCTION"><span class="badge">M</span>FUNCTION</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.GLOBAL"><span class="badge">M</span>GLOBAL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.GOTO"><span class="badge">M</span>GOTO</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.IF"><span class="badge">M</span>IF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.IMPLEMENTS"><span class="badge">M</span>IMPLEMENTS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.INCLUDE"><span class="badge">M</span>INCLUDE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.INCLUDE_ONCE"><span class="badge">M</span>INCLUDE_ONCE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.INSTANCEOF"><span class="badge">M</span>INSTANCEOF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.INSTEADOF"><span class="badge">M</span>INSTEADOF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.INT"><span class="badge">M</span>INT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.INTERFACE"><span class="badge">M</span>INTERFACE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ISSET"><span class="badge">M</span>ISSET</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.ITERABLE"><span class="badge">M</span>ITERABLE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.LIST"><span class="badge">M</span>LIST</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.MATCH"><span class="badge">M</span>MATCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.NAMESPACE"><span class="badge">M</span>NAMESPACE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.NEW"><span class="badge">M</span>NEW</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.NULL"><span class="badge">M</span>NULL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.OR"><span class="badge">M</span>OR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.PARENT"><span class="badge">M</span>PARENT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.PRINT"><span class="badge">M</span>PRINT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.PRIVATE"><span class="badge">M</span>PRIVATE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.PROTECTED"><span class="badge">M</span>PROTECTED</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.PUBLIC"><span class="badge">M</span>PUBLIC</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.READONLY"><span class="badge">M</span>READONLY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.REQUIRE"><span class="badge">M</span>REQUIRE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.REQUIRE_ONCE"><span class="badge">M</span>REQUIRE_ONCE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.RETURN"><span class="badge">M</span>RETURN</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.SELF"><span class="badge">M</span>SELF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.STATIC"><span class="badge">M</span>STATIC</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.STRING"><span class="badge">M</span>STRING</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.SWITCH"><span class="badge">M</span>SWITCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.THROW"><span class="badge">M</span>THROW</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.TRAIT"><span class="badge">M</span>TRAIT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.TRUE"><span class="badge">M</span>TRUE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.TRY"><span class="badge">M</span>TRY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.UNSET"><span class="badge">M</span>UNSET</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.USE"><span class="badge">M</span>USE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.VAR"><span class="badge">M</span>VAR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.VOID"><span class="badge">M</span>VOID</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.WHILE"><span class="badge">M</span>WHILE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.XOR"><span class="badge">M</span>XOR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper.YIELD"><span class="badge">M</span>YIELD</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="php/tests/proto/test_reserved_message_upper.proto">php/tests/proto/test_reserved_message_upper.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="upper.ABSTRACT">ABSTRACT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.AND">AND</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ARRAY">ARRAY</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.AS">AS</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.BOOL">BOOL</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.BREAK">BREAK</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CALLABLE">CALLABLE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CASE">CASE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CATCH">CATCH</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CLASS">CLASS</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CLONE">CLONE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CONST">CONST</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.CONTINUE">CONTINUE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.DECLARE">DECLARE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.DEFAULT">DEFAULT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.DIE">DIE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.DO">DO</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ECHO">ECHO</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ELSE">ELSE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ELSEIF">ELSEIF</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.EMPTY">EMPTY</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ENDDECLARE">ENDDECLARE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ENDFOR">ENDFOR</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ENDFOREACH">ENDFOREACH</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ENDIF">ENDIF</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ENDSWITCH">ENDSWITCH</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ENDWHILE">ENDWHILE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.EVAL">EVAL</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.EXIT">EXIT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.EXTENDS">EXTENDS</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FALSE">FALSE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FINAL">FINAL</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FINALLY">FINALLY</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FLOAT">FLOAT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FN">FN</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FOR">FOR</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FOREACH">FOREACH</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.FUNCTION">FUNCTION</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.GLOBAL">GLOBAL</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.GOTO">GOTO</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.IF">IF</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.IMPLEMENTS">IMPLEMENTS</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.INCLUDE">INCLUDE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.INCLUDE_ONCE">INCLUDE_ONCE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.INSTANCEOF">INSTANCEOF</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.INSTEADOF">INSTEADOF</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.INT">INT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.INTERFACE">INTERFACE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ISSET">ISSET</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.ITERABLE">ITERABLE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.LIST">LIST</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.MATCH">MATCH</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.NAMESPACE">NAMESPACE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.NEW">NEW</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.NULL">NULL</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.OR">OR</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.PARENT">PARENT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.PRINT">PRINT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.PRIVATE">PRIVATE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.PROTECTED">PROTECTED</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.PUBLIC">PUBLIC</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.READONLY">READONLY</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.REQUIRE">REQUIRE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.REQUIRE_ONCE">REQUIRE_ONCE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.RETURN">RETURN</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.SELF">SELF</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.STATIC">STATIC</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.STRING">STRING</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.SWITCH">SWITCH</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.THROW">THROW</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.TRAIT">TRAIT</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.TRUE">TRUE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.TRY">TRY</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.UNSET">UNSET</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.USE">USE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.VAR">VAR</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.VOID">VOID</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.WHILE">WHILE</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.XOR">XOR</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="upper.YIELD">YIELD</h3>
+        <p></p>
+
+        
+
+        
+      
+
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+

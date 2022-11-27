@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#php%2ftests%2fproto%2ftest_reserved_enum_upper.proto">php/tests/proto/test_reserved_enum_upper.proto</a>
+            <ul>
+              
+              
+                <li>
+                  <a href="#upper_enum.ABSTRACT"><span class="badge">E</span>ABSTRACT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.AND"><span class="badge">E</span>AND</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ARRAY"><span class="badge">E</span>ARRAY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.AS"><span class="badge">E</span>AS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.BOOL"><span class="badge">E</span>BOOL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.BREAK"><span class="badge">E</span>BREAK</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CALLABLE"><span class="badge">E</span>CALLABLE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CASE"><span class="badge">E</span>CASE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CATCH"><span class="badge">E</span>CATCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CLASS"><span class="badge">E</span>CLASS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CLONE"><span class="badge">E</span>CLONE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CONST"><span class="badge">E</span>CONST</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.CONTINUE"><span class="badge">E</span>CONTINUE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.DECLARE"><span class="badge">E</span>DECLARE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.DEFAULT"><span class="badge">E</span>DEFAULT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.DIE"><span class="badge">E</span>DIE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.DO"><span class="badge">E</span>DO</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ECHO"><span class="badge">E</span>ECHO</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ELSE"><span class="badge">E</span>ELSE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ELSEIF"><span class="badge">E</span>ELSEIF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.EMPTY"><span class="badge">E</span>EMPTY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ENDDECLARE"><span class="badge">E</span>ENDDECLARE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ENDFOR"><span class="badge">E</span>ENDFOR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ENDFOREACH"><span class="badge">E</span>ENDFOREACH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ENDIF"><span class="badge">E</span>ENDIF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ENDSWITCH"><span class="badge">E</span>ENDSWITCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ENDWHILE"><span class="badge">E</span>ENDWHILE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.EVAL"><span class="badge">E</span>EVAL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.EXIT"><span class="badge">E</span>EXIT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.EXTENDS"><span class="badge">E</span>EXTENDS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FALSE"><span class="badge">E</span>FALSE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FINAL"><span class="badge">E</span>FINAL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FINALLY"><span class="badge">E</span>FINALLY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FLOAT"><span class="badge">E</span>FLOAT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FN"><span class="badge">E</span>FN</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FOR"><span class="badge">E</span>FOR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FOREACH"><span class="badge">E</span>FOREACH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.FUNCTION"><span class="badge">E</span>FUNCTION</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.GLOBAL"><span class="badge">E</span>GLOBAL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.GOTO"><span class="badge">E</span>GOTO</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.IF"><span class="badge">E</span>IF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.IMPLEMENTS"><span class="badge">E</span>IMPLEMENTS</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.INCLUDE"><span class="badge">E</span>INCLUDE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.INCLUDE_ONCE"><span class="badge">E</span>INCLUDE_ONCE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.INSTANCEOF"><span class="badge">E</span>INSTANCEOF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.INSTEADOF"><span class="badge">E</span>INSTEADOF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.INT"><span class="badge">E</span>INT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.INTERFACE"><span class="badge">E</span>INTERFACE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ISSET"><span class="badge">E</span>ISSET</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.ITERABLE"><span class="badge">E</span>ITERABLE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.LIST"><span class="badge">E</span>LIST</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.MATCH"><span class="badge">E</span>MATCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.NAMESPACE"><span class="badge">E</span>NAMESPACE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.NEW"><span class="badge">E</span>NEW</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.NULL"><span class="badge">E</span>NULL</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.OR"><span class="badge">E</span>OR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.PARENT"><span class="badge">E</span>PARENT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.PRINT"><span class="badge">E</span>PRINT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.PRIVATE"><span class="badge">E</span>PRIVATE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.PROTECTED"><span class="badge">E</span>PROTECTED</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.PUBLIC"><span class="badge">E</span>PUBLIC</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.READONLY"><span class="badge">E</span>READONLY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.REQUIRE"><span class="badge">E</span>REQUIRE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.REQUIRE_ONCE"><span class="badge">E</span>REQUIRE_ONCE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.RETURN"><span class="badge">E</span>RETURN</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.SELF"><span class="badge">E</span>SELF</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.STATIC"><span class="badge">E</span>STATIC</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.STRING"><span class="badge">E</span>STRING</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.SWITCH"><span class="badge">E</span>SWITCH</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.THROW"><span class="badge">E</span>THROW</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.TRAIT"><span class="badge">E</span>TRAIT</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.TRUE"><span class="badge">E</span>TRUE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.TRY"><span class="badge">E</span>TRY</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.UNSET"><span class="badge">E</span>UNSET</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.USE"><span class="badge">E</span>USE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.VAR"><span class="badge">E</span>VAR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.VOID"><span class="badge">E</span>VOID</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.WHILE"><span class="badge">E</span>WHILE</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.XOR"><span class="badge">E</span>XOR</a>
+                </li>
+              
+                <li>
+                  <a href="#upper_enum.YIELD"><span class="badge">E</span>YIELD</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="php/tests/proto/test_reserved_enum_upper.proto">php/tests/proto/test_reserved_enum_upper.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+
+      
+        <h3 id="upper_enum.ABSTRACT">ABSTRACT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO1</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.AND">AND</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO2</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ARRAY">ARRAY</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO3</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.AS">AS</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO4</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.BOOL">BOOL</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO71</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.BREAK">BREAK</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO5</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CALLABLE">CALLABLE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO6</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CASE">CASE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO7</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CATCH">CATCH</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO8</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CLASS">CLASS</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO9</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CLONE">CLONE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO10</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CONST">CONST</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO11</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.CONTINUE">CONTINUE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO12</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.DECLARE">DECLARE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO13</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.DEFAULT">DEFAULT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO14</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.DIE">DIE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO15</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.DO">DO</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO16</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ECHO">ECHO</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO17</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ELSE">ELSE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO18</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ELSEIF">ELSEIF</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO19</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.EMPTY">EMPTY</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO20</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ENDDECLARE">ENDDECLARE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO21</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ENDFOR">ENDFOR</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO22</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ENDFOREACH">ENDFOREACH</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO23</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ENDIF">ENDIF</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO24</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ENDSWITCH">ENDSWITCH</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO25</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ENDWHILE">ENDWHILE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO26</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.EVAL">EVAL</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO27</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.EXIT">EXIT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO28</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.EXTENDS">EXTENDS</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO29</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FALSE">FALSE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO74</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FINAL">FINAL</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO30</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FINALLY">FINALLY</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO31</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FLOAT">FLOAT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO70</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FN">FN</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO32</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FOR">FOR</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO33</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FOREACH">FOREACH</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO34</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.FUNCTION">FUNCTION</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO35</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.GLOBAL">GLOBAL</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO36</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.GOTO">GOTO</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO37</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.IF">IF</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO38</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.IMPLEMENTS">IMPLEMENTS</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO39</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.INCLUDE">INCLUDE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO40</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.INCLUDE_ONCE">INCLUDE_ONCE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO41</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.INSTANCEOF">INSTANCEOF</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO42</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.INSTEADOF">INSTEADOF</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO43</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.INT">INT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO69</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.INTERFACE">INTERFACE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO44</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ISSET">ISSET</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO45</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.ITERABLE">ITERABLE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO77</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.LIST">LIST</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO46</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.MATCH">MATCH</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO47</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.NAMESPACE">NAMESPACE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO48</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.NEW">NEW</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO49</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.NULL">NULL</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO75</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.OR">OR</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO50</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.PARENT">PARENT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO78</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.PRINT">PRINT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO51</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.PRIVATE">PRIVATE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO52</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.PROTECTED">PROTECTED</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO53</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.PUBLIC">PUBLIC</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO54</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.READONLY">READONLY</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO80</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.REQUIRE">REQUIRE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO55</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.REQUIRE_ONCE">REQUIRE_ONCE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO56</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.RETURN">RETURN</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO57</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.SELF">SELF</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO79</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.STATIC">STATIC</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO58</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.STRING">STRING</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO72</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.SWITCH">SWITCH</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO59</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.THROW">THROW</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO60</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.TRAIT">TRAIT</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO61</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.TRUE">TRUE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO73</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.TRY">TRY</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO62</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.UNSET">UNSET</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO63</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.USE">USE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO64</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.VAR">VAR</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO65</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.VOID">VOID</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO76</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.WHILE">WHILE</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO66</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.XOR">XOR</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO67</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="upper_enum.YIELD">YIELD</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ZERO68</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+

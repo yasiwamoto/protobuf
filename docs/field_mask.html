@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#src%2fgoogle%2fprotobuf%2ffield_mask.proto">src/google/protobuf/field_mask.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#google.protobuf.FieldMask"><span class="badge">M</span>FieldMask</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="src/google/protobuf/field_mask.proto">src/google/protobuf/field_mask.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="google.protobuf.FieldMask">FieldMask</h3>
+        <p>`FieldMask` represents a set of symbolic field paths, for example:</p><p>paths: "f.a"</p><p>paths: "f.b.d"</p><p>Here `f` represents a field in some root message, `a` and `b`</p><p>fields in the message found in `f`, and `d` a field found in the</p><p>message in `f.b`.</p><p>Field masks are used to specify a subset of fields that should be</p><p>returned by a get operation or modified by an update operation.</p><p>Field masks also have a custom JSON encoding (see below).</p><p># Field Masks in Projections</p><p>When used in the context of a projection, a response message or</p><p>sub-message is filtered by the API to only contain those fields as</p><p>specified in the mask. For example, if the mask in the previous</p><p>example is applied to a response message as follows:</p><p>f {</p><p>a : 22</p><p>b {</p><p>d : 1</p><p>x : 2</p><p>}</p><p>y : 13</p><p>}</p><p>z: 8</p><p>The result will not contain specific values for fields x,y and z</p><p>(their value will be set to the default, and omitted in proto text</p><p>output):</p><p>f {</p><p>a : 22</p><p>b {</p><p>d : 1</p><p>}</p><p>}</p><p>A repeated field is not allowed except at the last position of a</p><p>paths string.</p><p>If a FieldMask object is not present in a get operation, the</p><p>operation applies to all fields (as if a FieldMask of all fields</p><p>had been specified).</p><p>Note that a field mask does not necessarily apply to the</p><p>top-level response message. In case of a REST get operation, the</p><p>field mask applies directly to the response, but in case of a REST</p><p>list operation, the mask instead applies to each individual message</p><p>in the returned resource list. In case of a REST custom method,</p><p>other definitions may be used. Where the mask applies will be</p><p>clearly documented together with its declaration in the API.  In</p><p>any case, the effect on the returned resource/resources is required</p><p>behavior for APIs.</p><p># Field Masks in Update Operations</p><p>A field mask in update operations specifies which fields of the</p><p>targeted resource are going to be updated. The API is required</p><p>to only change the values of the fields as specified in the mask</p><p>and leave the others untouched. If a resource is passed in to</p><p>describe the updated values, the API ignores the values of all</p><p>fields not covered by the mask.</p><p>If a repeated field is specified for an update operation, new values will</p><p>be appended to the existing repeated field in the target resource. Note that</p><p>a repeated field is only allowed in the last position of a `paths` string.</p><p>If a sub-message is specified in the last position of the field mask for an</p><p>update operation, then new value will be merged into the existing sub-message</p><p>in the target resource.</p><p>For example, given the target message:</p><p>f {</p><p>b {</p><p>d: 1</p><p>x: 2</p><p>}</p><p>c: [1]</p><p>}</p><p>And an update message:</p><p>f {</p><p>b {</p><p>d: 10</p><p>}</p><p>c: [2]</p><p>}</p><p>then if the field mask is:</p><p>paths: ["f.b", "f.c"]</p><p>then the result will be:</p><p>f {</p><p>b {</p><p>d: 10</p><p>x: 2</p><p>}</p><p>c: [1, 2]</p><p>}</p><p>An implementation may provide options to override this default behavior for</p><p>repeated and message fields.</p><p>In order to reset a field's value to the default, the field must</p><p>be in the mask and set to the default value in the provided resource.</p><p>Hence, in order to reset all fields of a resource, provide a default</p><p>instance of the resource and set all fields in the mask, or do</p><p>not provide a mask as described below.</p><p>If a field mask is not present on update, the operation applies to</p><p>all fields (as if a field mask of all fields has been specified).</p><p>Note that in the presence of schema evolution, this may mean that</p><p>fields the client does not know and has therefore not filled into</p><p>the request will be reset to their default. If this is unwanted</p><p>behavior, a specific service may require a client to always specify</p><p>a field mask, producing an error if not.</p><p>As with get operations, the location of the resource which</p><p>describes the updated values in the request message depends on the</p><p>operation kind. In any case, the effect of the field mask is</p><p>required to be honored by the API.</p><p>## Considerations for HTTP REST</p><p>The HTTP kind of an update operation which uses a field mask must</p><p>be set to PATCH instead of PUT in order to satisfy HTTP semantics</p><p>(PUT must only be used for full updates).</p><p># JSON Encoding of Field Masks</p><p>In JSON, a field mask is encoded as a single string where paths are</p><p>separated by a comma. Fields name in each path are converted</p><p>to/from lower-camel naming conventions.</p><p>As an example, consider the following message declarations:</p><p>message Profile {</p><p>User user = 1;</p><p>Photo photo = 2;</p><p>}</p><p>message User {</p><p>string display_name = 1;</p><p>string address = 2;</p><p>}</p><p>In proto a field mask for `Profile` may look as such:</p><p>mask {</p><p>paths: "user.display_name"</p><p>paths: "photo"</p><p>}</p><p>In JSON, the same mask is represented as below:</p><p>{</p><p>mask: "user.displayName,photo"</p><p>}</p><p># Field Masks and Oneof Fields</p><p>Field masks treat fields in oneofs just as regular fields. Consider the</p><p>following message:</p><p>message SampleMessage {</p><p>oneof test_oneof {</p><p>string name = 4;</p><p>SubMessage sub_message = 9;</p><p>}</p><p>}</p><p>The field mask can be:</p><p>mask {</p><p>paths: "name"</p><p>}</p><p>Or:</p><p>mask {</p><p>paths: "sub_message"</p><p>}</p><p>Note that oneof type names ("test_oneof" in this case) cannot be used in</p><p>paths.</p><p>## Field Mask Verification</p><p>The implementation of any API method which has a FieldMask type field in the</p><p>request should verify the included field paths, and return an</p><p>`INVALID_ARGUMENT` error if any path is unmappable.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>paths</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The set of field mask paths. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+
